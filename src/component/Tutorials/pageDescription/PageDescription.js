@@ -44,7 +44,7 @@ const PageDescription = forwardRef((props,ref) => {
         <p>{data.description}</p>
         {list}
       </div>}
-      {MDData&& !isVisible&& <ReactMarkdown>{MDData}</ReactMarkdown>}
+      {MDData&& !isVisible&& <div className="sidebar-content-area"> <ReactMarkdown>{MDData}</ReactMarkdown></div>}
     </>
   );
 })
