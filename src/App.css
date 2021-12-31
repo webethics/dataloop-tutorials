@@ -1,38 +1,124 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  height: 100vh;
+}
+/* Above Css may not require while merging */
+.sidebar {
+  width: 370px;
+  max-width: 100%;
+  height: 75vh;
+  margin: auto;
+  box-shadow: 0px 3px 6px rgba(16, 30, 115, 0.15);
+  border-radius: 0px 0px 0px 5px;
+  border: 1px solid #e4e4e4;
+}
+.sidebar ul {
+  list-style-type: none;
+  margin: 0;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 5px 10px;
+  border-bottom: 1px solid #e4e4e4;
+}
+.sidebar ul li:not(:last-child):not(:first-child) {
+  margin-left: 10px;
+}
+.sidebar ul li:last-child {
+  margin-left: auto;
+}
+.sidebar ul li svg {
+  vertical-align: middle;
+  cursor: pointer;
+  fill: #171723;
+}
+.sidebar.light ul li svg {
+  fill: #171723;
+}
+.sidebar.dark ul li svg {
+  fill: rgba(255, 255, 255, 0.75);
+}
+.sidebar.light ul li svg:hover,
+.sidebar ul li svg:hover {
+  fill: #7b8cff;
+}
+.sidebar.dark ul li svg:hover {
+  fill: #5a6eff;
+}
+.sidebar.light ul li svg:focus,
+.sidebar ul li svg:focus {
+  fill: #3452ff;
+}
+.sidebar.dark ul li svg:focus {
+  fill: #7b8cff;
+}
+.sidebar .Dropdown {
+  position: relative;
+}
+.sidebar .Dropdown .dropdown-group {
+  position: absolute;
+  right: 0;
+  background-color: #ffffff;
+  border-radius: 2px;
+  min-width: 160px;
+  box-shadow: 0px 3px 6px rgba(16, 30, 115, 0.15);
+}
+.sidebar .dropdown-group {
+  display: none;
 }
 
-.App-link {
-  color: #61dafb;
+.sidebar .dropdown-group.active {
+  display: block;
+}
+.sidebar .dropdown-group .dropdown-item span {
+  display: block;
+  font-size: 12px;
+  line-height: 14px;
+  padding: 7px 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.sidebar-content-area {
+  padding: 15px 20px;
+}
+.sidebar-content-area p {
+  margin: 20px 0;
+}
+.sidebar-content-area p:nth-of-type(1) {
+  margin-top: 10px;
+}
+.sidebar-content-area p,
+.sidebar-content-area dl dd,
+.sidebar-content-area h2 {
+  font-size: 12px;
+  line-height: 16px;
+  color: #171723;
+}
+.sidebar-content-area h1 {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 0;
+}
+.sidebar-content-area h2 {
+  margin: 0;
+  color: #999999;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.sidebar-content-area dl dt {
+  font-size: 14px;
+  line-height: 20px;
+  color: #3452ff;
+}
+.sidebar-content-area dl dd {
+  margin-left: 0;
+}
+.sidebar-content-area dl dd:not(:last-child) {
+  margin-bottom: 15px;
 }
