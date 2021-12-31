@@ -6,11 +6,14 @@ import DropdownItem from "./DropdownItem";
 import { FaLaptop } from "../../node_modules/react-icons/fa/index";
 import { FaHome } from "../../node_modules/react-icons/fa/index";
 import PageDescription from "./pageDescription/PageDescription";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect, useRef } from "react/cjs/react.development";
+
 function Tutorials(props) {
   const { initialData } = props;
   const [FirstListItemDescriptionData, setFirstListItemDescriptionData] =
     useState(null);
+  const childCompRef = useRef();
+
 
   const getDetails = async (additionalURL) => {
     const { data } = await axios({
@@ -19,16 +22,21 @@ function Tutorials(props) {
     });
 
     setFirstListItemDescriptionData(data);
+    childCompRef.current.showVisible();
   };
-  useEffect(()=>{
-    
-  })
+  useEffect(() => {
+    getDetails("data_management/index.json");
+  }, []);
 
   return (
     <div className="sidebar">
       <div className="top-header-area">
         <ul>
-          <li>
+          <li
+            onClick={() => {
+              getDetails("data_management/index.json");
+            }}
+          >
             <FaHome />
           </li>
           <li>
@@ -37,15 +45,27 @@ function Tutorials(props) {
           <li>
             <Dropdown>
               {initialData.map((item) => (
-                <DropdownItem  key={item.displayName}>
-                  <a href="#" onClick={()=>{getDetails(item.location)}}>{item.displayName}</a>
+                <DropdownItem key={item.displayName}>
+                  <a
+                    href="#"
+                    onClick={() => {
+                      getDetails(item.location);
+                    }}
+                  >
+                    {item.displayName}
+                  </a>
                 </DropdownItem>
               ))}
             </Dropdown>
           </li>
         </ul>
       </div>
-      {FirstListItemDescriptionData&& <PageDescription data={FirstListItemDescriptionData} />}
+      {FirstListItemDescriptionData && (
+        <PageDescription
+          ref={childCompRef}
+          data={FirstListItemDescriptionData}
+        />
+      )}
       {/* <div className="sidebar-content-area">
         <h1>Data-Management Using Python SDK</h1>
         <p>
