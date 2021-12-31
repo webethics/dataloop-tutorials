@@ -3,8 +3,7 @@ import axios from "axios";
 import config from "../config/config";
 import Dropdown from "./Dropdown";
 import DropdownItem from "./DropdownItem";
-import { FaLaptop } from "../../node_modules/react-icons/fa/index";
-import { FaHome } from "../../node_modules/react-icons/fa/index";
+import { FaLaptop, FaHome } from "../../node_modules/react-icons/fa/index";
 import PageDescription from "./pageDescription/PageDescription";
 import { useEffect } from "react/cjs/react.development";
 function Tutorials(props) {
@@ -20,12 +19,13 @@ function Tutorials(props) {
 
     setFirstListItemDescriptionData(data);
   };
-  useEffect(()=>{
-    
+  useEffect(() => {
+
   })
 
   return (
-    <div className="sidebar">
+
+    <div className={`${props.theme} sidebar`}>
       <div className="top-header-area">
         <ul>
           <li>
@@ -37,15 +37,15 @@ function Tutorials(props) {
           <li>
             <Dropdown>
               {initialData.map((item) => (
-                <DropdownItem  key={item.displayName}>
-                  <a href="#" onClick={()=>{getDetails(item.location)}}>{item.displayName}</a>
+                <DropdownItem key={item.displayName}>
+                  <span onClick={() => { getDetails(item.location) }}>{item.displayName}</span>
                 </DropdownItem>
               ))}
             </Dropdown>
           </li>
         </ul>
       </div>
-      {FirstListItemDescriptionData&& <PageDescription data={FirstListItemDescriptionData} />}
+      {FirstListItemDescriptionData && <PageDescription data={FirstListItemDescriptionData} />}
       {/* <div className="sidebar-content-area">
         <h1>Data-Management Using Python SDK</h1>
         <p>

@@ -3,10 +3,11 @@ import { useLayoutEffect, useState } from "react";
 import "./App.css";
 import Tutorials from "./component/Tutorials";
 import config from "./config/config";
+import { FaMoon } from "../node_modules/react-icons/fa/index";
 
 function App() {
   const [initialData, setInitialData] = useState(null);
-  
+  const [lightTheme, setChangeTheme] = useState("");
 
   useLayoutEffect(() => {
     const initialRequest = async () => {
@@ -21,7 +22,8 @@ function App() {
 
   return (
     <div className="App">
-      {initialData && <Tutorials initialData={initialData} />}
+      <FaMoon onClick={(e) => { (lightTheme == "") ? setChangeTheme("dark") : setChangeTheme(""); }} />
+      {initialData && <Tutorials theme={lightTheme} initialData={initialData} />}
     </div>
   );
 }
