@@ -10,6 +10,9 @@ body {
 }
 /* Above Css may not require while merging */
 /* Light Theme */
+.change-theme {
+  cursor: pointer;
+}
 .sidebar {
   width: 370px;
   max-width: 100%;
@@ -70,7 +73,7 @@ body {
 .sidebar .dropdown-group .dropdown-item span.active {background-color: #ECECEC;}
 .sidebar .dropdown-group .dropdown-item span:hover {background-color: #F8F8F8;}
 
-.sidebar-content-area {padding: 15px 20px;}
+.sidebar-content-area {padding: 15px 20px; overflow-y: auto; height: calc(100% - 60px);}
 .sidebar-content-area p {margin: 20px 0;}
 .sidebar-content-area p:nth-of-type(1) {margin-top: 10px;}
 .sidebar-content-area p,
@@ -105,6 +108,9 @@ body {
 .sidebar-content-area dl dd:not(:last-child) {margin-bottom: 15px;}
 
 /* Dark Theme */
+.change-theme.dark {
+  fill: #7C8CFF;
+}
 .sidebar.dark {
   background-color: #30363D;
   border: 1px solid rgba(255,255,255,0.15);
