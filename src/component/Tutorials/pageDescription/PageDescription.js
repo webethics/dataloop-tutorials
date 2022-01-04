@@ -151,9 +151,10 @@ const PageDescription = forwardRef((props, ref) => {
               </div>
             </Scrollbars>
             <div className="sidebar-footer">
-              {prevPage && <p>prev: {prevPage}</p>}
-              {nextPage && <p>next: {nextPage}</p>}
+              {prevPage && <p>Prev: {prevPage}</p>}
+              {nextPage && <p>Next: {nextPage}</p>}
               <div className="footer-buttons-wrap">
+                <div class="btn-placeholder">
                 {curPage > 1 && (
                   <button
                     className="prev"
@@ -165,9 +166,11 @@ const PageDescription = forwardRef((props, ref) => {
                     prev
                   </button>
                 )}
+                  </div>
                 <p>
                   {curPage} of {totPage} chapters
                 </p>
+                <div class="btn-placeholder">
                 {curPage < totPage && (
                   <button
                     className="next"
@@ -176,6 +179,7 @@ const PageDescription = forwardRef((props, ref) => {
                     next
                   </button>
                 )}
+                </div>
               </div>
             </div>
           </div>
