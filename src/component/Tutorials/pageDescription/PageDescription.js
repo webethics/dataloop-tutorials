@@ -1,15 +1,20 @@
-import { useState, forwardRef, useImperativeHandle } from "react";
+import {
+  useState,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useEffect,
+} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { paginationActions } from "../../../store";
 import { Scrollbars } from "react-custom-scrollbars";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 
-
-
 const PageDescription = forwardRef((props, ref) => {
   const { data } = props;
   const dispatch = useDispatch();
+  const mdRef = useRef();
   const {
     currentPage: curPage,
     totalPages: totPage,
@@ -21,6 +26,19 @@ const PageDescription = forwardRef((props, ref) => {
 
   const [MDData, SetMDData] = useState(null);
   const [isVisible, SetIsVisible] = useState(true);
+  useEffect(() => {
+    const codeElement = document.getElementsByTagName("code");
+    for(let i=0 ; i< codeElement.length;i++){
+      const button = document.createElement("button");
+      button.id = "btn1";
+      button.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.6573 3.4H10.5145V3.20001C10.5145 2.98 10.3087 2.8 10.0573 2.8H9.37161V2.59999C9.37161 2.25999 9.07448 2 8.6859 2H7.31446C6.92588 2 6.62875 2.28 6.62875 2.59999V2.79998H5.94305C5.69161 2.79998 5.4859 2.97998 5.4859 3.19998V3.39997H4.34305C3.70304 3.39997 3.2002 3.83998 3.2002 4.39997V13C3.2002 13.56 3.70306 14 4.34305 14H11.6573C12.2974 14 12.8002 13.5599 12.8002 13V4.39999C12.8002 3.84001 12.2973 3.4 11.6573 3.4ZM5.94302 3.20001H6.85731C6.99446 3.20001 7.08587 3.12002 7.08587 3.00002V2.59999C7.08587 2.47999 7.17729 2.4 7.31443 2.4H8.68587C8.82302 2.4 8.91443 2.50001 8.91443 2.59999V2.99999C8.91443 3.11999 9.00585 3.19998 9.14299 3.19998H10.0573V3.59999V4.59998H5.94302V3.60001V3.20001ZM12.343 13C12.343 13.34 12.0459 13.6 11.6573 13.6H4.34305C3.95447 13.6 3.65734 13.34 3.65734 13V4.39999C3.65734 4.05999 3.95447 3.8 4.34305 3.8H5.4859V4.6C5.4859 4.82001 5.69161 5.00001 5.94305 5.00001H10.0573C10.3088 5.00001 10.5145 4.82001 10.5145 4.6V3.8H11.6573C12.0459 3.8 12.343 4.05999 12.343 4.39999V13Z" fill="#171723"/></svg>';
+      button.onclick=()=>{navigator.clipboard.writeText(codeElement[i].innerHTML)}
+    
+    const refChild = codeElement[i];
+    refChild && refChild.parentNode.insertBefore(button, refChild.nextSibling);
+    }
+   
+  }, [MDData,isVisible]);        
 
   const getDetails = async (additionalURL) => {
     const { data } = await axios({
@@ -46,7 +64,9 @@ const PageDescription = forwardRef((props, ref) => {
           dispatch(paginationActions.setNextPage(""));
           dispatch(paginationActions.setprevPage(""));
           dispatch(paginationActions.setNextURL(""));
-          getDetails('https://raw.githubusercontent.com/dataloop-ai/dtlpy-documentation/sdk-tutorials/tutorials/data_management/cloud_storage_integrations/chapter.md');
+          getDetails(
+            "https://raw.githubusercontent.com/dataloop-ai/dtlpy-documentation/sdk-tutorials/tutorials/data_management/cloud_storage_integrations/chapter.md"
+          );
           dispatch(paginationActions.changeCurrentPage(key + 1));
           if (key + 1 < totPage) {
             dispatch(
@@ -77,11 +97,12 @@ const PageDescription = forwardRef((props, ref) => {
   ));
 
   const prevButtonHandler = (urlForPrev) => {
-    getDetails('https://raw.githubusercontent.com/dataloop-ai/dtlpy-documentation/sdk-tutorials/tutorials/data_management/cloud_storage_integrations/chapter.md');
+    getDetails(
+      "https://raw.githubusercontent.com/dataloop-ai/dtlpy-documentation/sdk-tutorials/tutorials/data_management/cloud_storage_integrations/chapter.md"
+    );
     if (parseInt(curPage) <= 2) {
       dispatch(paginationActions.setprevPage(null));
-      console.log("hit");
-      console.log(curPage);
+     
     }
     if (curPage >= 1) {
       dispatch(
@@ -103,7 +124,9 @@ const PageDescription = forwardRef((props, ref) => {
   };
 
   const nextButtonHandler = (urlForNext) => {
-    getDetails('https://raw.githubusercontent.com/dataloop-ai/dtlpy-documentation/sdk-tutorials/tutorials/data_management/data_versioning/chapter.md');
+    getDetails(
+      "https://raw.githubusercontent.com/dataloop-ai/dtlpy-documentation/sdk-tutorials/tutorials/data_management/data_versioning/chapter.md"
+    );
 
     if (parseInt(curPage) > 0) {
       dispatch(
@@ -128,7 +151,11 @@ const PageDescription = forwardRef((props, ref) => {
     dispatch(paginationActions.changeCurrentPage(curPage + 1));
   };
 
- 
+  // const codeCopyHandler =()=>{
+  //   var elements = document.getElementsByTagName('code');
+  //   console.log(elements.length);
+  // }
+
   return (
     <>
       {isVisible && (
@@ -146,7 +173,7 @@ const PageDescription = forwardRef((props, ref) => {
         <>
           <div className="sidebar-content-area">
             <Scrollbars style={{ width: "100%", height: "100%" }}>
-              <div className="md-data">
+              <div ref={mdRef} className="md-data">
                 <ReactMarkdown>{MDData}</ReactMarkdown>
               </div>
             </Scrollbars>
@@ -155,36 +182,37 @@ const PageDescription = forwardRef((props, ref) => {
               {nextPage && <p>Next: {nextPage}</p>}
               <div className="footer-buttons-wrap">
                 <div class="btn-placeholder">
-                {curPage > 1 && (
-                  <button
-                    className="prev"
-                    onClick={() => {
-                      prevButtonHandler(prevURL);
-                    }}
-                  >
-                    {" "}
-                    prev
-                  </button>
-                )}
-                  </div>
+                  {curPage > 1 && (
+                    <button
+                      className="prev"
+                      onClick={() => {
+                        prevButtonHandler(prevURL);
+                      }}
+                    >
+                      {" "}
+                      prev
+                    </button>
+                  )}
+                </div>
                 <p>
                   {curPage} of {totPage} chapters
                 </p>
                 <div class="btn-placeholder">
-                {curPage < totPage && (
-                  <button
-                    className="next"
-                    onClick={() => nextButtonHandler(nextURL)}
-                  >
-                    next
-                  </button>
-                )}
+                  {curPage < totPage && (
+                    <button
+                      className="next"
+                      onClick={() => nextButtonHandler(nextURL)}
+                    >
+                      next
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </>
       )}
+      {/* <button onClick={codeCopyHandler} >click</button> */}
     </>
   );
 });

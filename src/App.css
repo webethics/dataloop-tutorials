@@ -145,6 +145,17 @@ body {
 .sidebar-content-area dl dd:not(:last-child) {margin-bottom: 15px;}
 .sidebar-content-area pre {
   margin: 0;
+  position: relative;
+}
+.sidebar-content-area pre button {
+  position: absolute;
+  right: 0;
+  top: -20px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  line-height: 10px;
 }
 .sidebar-content-area pre code {
   font-size: 12px;
@@ -156,7 +167,12 @@ body {
   border: 1px solid #E4E4E4;
   font-family: 'Roboto', sans-serif;
 }
-.sidebar-content-area *:empty {display: none;}
+.sidebar-content-area h1:empty,
+.sidebar-content-area h2:empty,
+.sidebar-content-area h3:empty,
+.sidebar-content-area p:empty,
+.sidebar-content-area pre:empty,
+.sidebar-content-area pre code:empty {display: none;}
 .sidebar-content-area pre code:empty {
   padding: 0;
   border: none;
@@ -268,7 +284,7 @@ body {
 .sidebar.dark .sidebar-content-area h3,
 .sidebar.dark .sidebar-content-area h2 {color: rgba(255,255,255,0.25);}
 .sidebar.dark .sidebar-content-area dl dt {color: #7B8CFF;}
-
+.sidebar.dark .sidebar-content-area pre button svg path {fill:rgba(255,255,255,0.75);}
 .sidebar.dark .sidebar-footer button {  
   border-color:  #7B8CFF;
 }
@@ -294,4 +310,5 @@ body {
   border-color: #5A6EFF;
   color:rgba(255, 255, 255, 0.75);
 }
+
 
