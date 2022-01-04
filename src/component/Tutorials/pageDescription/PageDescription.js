@@ -50,7 +50,7 @@ const PageDescription = forwardRef((props, ref) => {
           dispatch(
             paginationActions.setNextPage(
               data.content[key + 1].displayName.charAt(0).toUpperCase() +
-                data.content[key + 1].displayName.slice(1).toLowerCase()
+              data.content[key + 1].displayName.slice(1).toLowerCase()
             )
           );
           dispatch(
@@ -60,7 +60,7 @@ const PageDescription = forwardRef((props, ref) => {
             dispatch(
               paginationActions.setprevPage(
                 data.content[key - 1].displayName.charAt(0).toUpperCase() +
-                  data.content[key - 1].displayName.slice(1).toLowerCase()
+                data.content[key - 1].displayName.slice(1).toLowerCase()
               )
             );
           }
@@ -85,8 +85,8 @@ const PageDescription = forwardRef((props, ref) => {
     if (curPage >= 1) {
       dispatch(
         paginationActions.setNextPage(
-          data.content[curPage-1].displayName.charAt(0).toUpperCase() +
-            data.content[curPage-1].displayName.slice(1).toLowerCase()
+          data.content[curPage - 1].displayName.charAt(0).toUpperCase() +
+          data.content[curPage - 1].displayName.slice(1).toLowerCase()
         )
       );
     }
@@ -101,7 +101,7 @@ const PageDescription = forwardRef((props, ref) => {
       dispatch(
         paginationActions.setprevPage(
           data.content[curPage - 1].displayName.charAt(0).toUpperCase() +
-            data.content[curPage - 1].displayName.slice(1).toLowerCase()
+          data.content[curPage - 1].displayName.slice(1).toLowerCase()
         )
       );
     }
@@ -109,7 +109,7 @@ const PageDescription = forwardRef((props, ref) => {
       dispatch(
         paginationActions.setNextPage(
           data.content[curPage + 1].displayName.charAt(0).toUpperCase() +
-            data.content[curPage + 1].displayName.slice(1).toLowerCase()
+          data.content[curPage + 1].displayName.slice(1).toLowerCase()
         )
       );
     }
@@ -121,34 +121,38 @@ const PageDescription = forwardRef((props, ref) => {
     <>
       {isVisible && (
         <div className="sidebar-content-area">
-          <h1>{data.name}</h1>
-          <p>{data.description}</p>
-          {list}
+          <div class="md-data">
+            <h1>{data.name}</h1>
+            <p>{data.description}</p>
+            {list}
+          </div>
         </div>
       )}
       {MDData && !isVisible && (
         <>
           <div className="sidebar-content-area">
             {" "}
-            <ReactMarkdown>{MDData}</ReactMarkdown>{" "}
-            {prevPage && <p>prev: {prevPage}</p>}
-            {nextPage && <p>next: {nextPage}</p>}
-            {curPage > 1 && (
-              <button
-                onClick={() => {
-                  prevButtonHandler(prevURL);
-                }}
-              >
-                {" "}
-                previous
-              </button>
-            )}
-            <h4>
-              {curPage} of {totPage} pages
-            </h4>
-            {curPage < totPage && (
-              <button onClick={() => nextButtonHandler(nextURL)}>next</button>
-            )}
+            <div class="md-data"><ReactMarkdown>{MDData}</ReactMarkdown></div>
+            <div class="sidebar-footer">
+              {prevPage && <p>prev: {prevPage}</p>}
+              {nextPage && <p>next: {nextPage}</p>}
+              <div class="footer-buttons-wrap">
+                {curPage > 0 && (
+                  <button class="prev"
+                    onClick={() => {
+                      prevButtonHandler(prevURL);
+                    }}
+                  >
+                    {" "}
+                    prev
+                  </button>
+                )}
+                <p>{curPage} of {totPage} chapters</p>
+                {curPage < totPage && (
+                  <button class="next" onClick={() => nextButtonHandler(nextURL)}>next</button>
+                )}
+              </div>
+            </div>
           </div>
         </>
       )}
