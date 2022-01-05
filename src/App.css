@@ -312,3 +312,22 @@ body {
 }
 
 
+#btn1 {
+  
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #171723;
+  border: none;
+  border-radius: 15px;
+  
+}
+
+
+
+#btn1:active {
+  transform: translateY(4px);
+  transform: rotate(1turn);
+  transition-duration: .5s;
+ }
