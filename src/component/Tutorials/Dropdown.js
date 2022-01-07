@@ -1,6 +1,13 @@
 import React, { useState } from "react";
+import onClickOutside from "react-onclickoutside";
 function Dropdown(props) {
   const [isOpen, setIsOpen] = useState(false);
+  
+
+  Dropdown.handleClickOutside = () => {
+    setIsOpen(false);
+    
+  };
   return (
     <span className={isOpen ? "Dropdown active" : "Dropdown"}>
       <svg onClick={(e) => {
@@ -11,9 +18,12 @@ function Dropdown(props) {
         <path d="M15.4991 12H0.500607C0.362503 11.982 0.235738 11.9153 0.143914 11.8121C0.0520897 11.709 0.00146484 11.5765 0.00146484 11.4394C0.00146484 11.3022 0.0520897 11.1698 0.143914 11.0666C0.235738 10.9635 0.362503 10.8967 0.500607 10.8788H15.4991C15.6372 10.8967 15.7639 10.9635 15.8557 11.0666C15.9476 11.1698 15.9982 11.3022 15.9982 11.4394C15.9982 11.5765 15.9476 11.709 15.8557 11.8121C15.7639 11.9153 15.6372 11.982 15.4991 12V12Z" fill="#171723" />
       </svg>
 
-      <span onMouseLeave={(e) => { setIsOpen(!isOpen) }} className={isOpen ? "dropdown-group active" : "dropdown-group"}>{props.children}</span>
+      <span onMouseLeave={(e) => { setIsOpen(isOpen) }} className={isOpen ? "dropdown-group active" : "dropdown-group"}>{props.children}</span>
     </span>
   );
 }
 
-export default Dropdown; 
+const clickOutsideConfig = {
+  handleClickOutside: () => Dropdown.handleClickOutside,
+};
+export default onClickOutside(Dropdown,clickOutsideConfig) ; 

@@ -1,5 +1,7 @@
 body {
   font-family: "Roboto", sans-serif;
+  
+  
 }
 .App {
   display: flex;
@@ -7,6 +9,7 @@ body {
   align-items: center;
   height: 100vh;
   flex-direction: column;
+  
 }
 /* Above Css may not require while merging */
 /* Light Theme */
