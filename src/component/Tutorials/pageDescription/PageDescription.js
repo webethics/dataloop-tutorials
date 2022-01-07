@@ -7,8 +7,11 @@ import {
 } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { paginationActions } from "../../../store";
-import { Scrollbars } from "react-custom-scrollbars";
+// import { Scrollbars } from "react-custom-scrollbars";
 import axios from "axios";
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.min.css';
+
 import ReactMarkdown from "react-markdown";
 
 const PageDescription = forwardRef((props, ref) => {
@@ -85,7 +88,7 @@ const PageDescription = forwardRef((props, ref) => {
             dispatch(
               paginationActions.setNextPage(
                 data.content[key + 1].displayName.charAt(0).toUpperCase() +
-                  data.content[key + 1].displayName.slice(1).toLowerCase()
+                data.content[key + 1].displayName.slice(1).toLowerCase()
               )
             );
             dispatch(
@@ -96,7 +99,7 @@ const PageDescription = forwardRef((props, ref) => {
             dispatch(
               paginationActions.setprevPage(
                 data.content[key - 1].displayName.charAt(0).toUpperCase() +
-                  data.content[key - 1].displayName.slice(1).toLowerCase()
+                data.content[key - 1].displayName.slice(1).toLowerCase()
               )
             );
           }
@@ -110,7 +113,8 @@ const PageDescription = forwardRef((props, ref) => {
   ));
 
   const prevButtonHandler = (urlForPrev) => {
-    scrollBar.current.scrollToTop();
+    scrollBar.current.scrollX(0, 0);
+    // scrollBar.current.scrollToTop();
     getDetails(
       "https://raw.githubusercontent.com/dataloop-ai/dtlpy-documentation/sdk-tutorials/tutorials/data_management/cloud_storage_integrations/chapter.md"
     );
@@ -121,7 +125,7 @@ const PageDescription = forwardRef((props, ref) => {
       dispatch(
         paginationActions.setNextPage(
           data.content[curPage - 1].displayName.charAt(0).toUpperCase() +
-            data.content[curPage - 1].displayName.slice(1).toLowerCase()
+          data.content[curPage - 1].displayName.slice(1).toLowerCase()
         )
       );
     }
@@ -129,7 +133,7 @@ const PageDescription = forwardRef((props, ref) => {
       dispatch(
         paginationActions.setprevPage(
           data.content[curPage - 3].displayName.charAt(0).toUpperCase() +
-            data.content[curPage - 3].displayName.slice(1).toLowerCase()
+          data.content[curPage - 3].displayName.slice(1).toLowerCase()
         )
       );
     }
@@ -137,7 +141,13 @@ const PageDescription = forwardRef((props, ref) => {
   };
 
   const nextButtonHandler = (urlForNext) => {
-    scrollBar.current.scrollToTop();
+    // scrollBar.current.scrollToTop();
+    window.scrollTo(0, 0)
+    // window.scroll({
+    //   top: 0,
+    //   behavior: 'smooth',
+    // });
+
     getDetails(
       "https://raw.githubusercontent.com/dataloop-ai/dtlpy-documentation/sdk-tutorials/tutorials/data_management/data_versioning/chapter.md"
     );
@@ -146,7 +156,7 @@ const PageDescription = forwardRef((props, ref) => {
       dispatch(
         paginationActions.setprevPage(
           data.content[curPage - 1].displayName.charAt(0).toUpperCase() +
-            data.content[curPage - 1].displayName.slice(1).toLowerCase()
+          data.content[curPage - 1].displayName.slice(1).toLowerCase()
         )
       );
     }
@@ -154,7 +164,7 @@ const PageDescription = forwardRef((props, ref) => {
       dispatch(
         paginationActions.setNextPage(
           data.content[curPage + 1].displayName.charAt(0).toUpperCase() +
-            data.content[curPage + 1].displayName.slice(1).toLowerCase()
+          data.content[curPage + 1].displayName.slice(1).toLowerCase()
         )
       );
     }
@@ -169,26 +179,32 @@ const PageDescription = forwardRef((props, ref) => {
     <>
       {isVisible && (
         <div className="sidebar-content-area listing">
-          <Scrollbars style={{ width: "100%", height: "100%" }}>
-            <div className="md-data">
-              <h1>{data.name}</h1>
-              <p>{data.description}</p>
-              {list}
-            </div>
-          </Scrollbars>
+          {/* <Scrollbars style={{ width: "100%" }}> */}
+
+          <div className="md-data">
+            <h1>{data.name}</h1>
+            <p>{data.description}</p>
+            {list}
+          </div>
+
+          {/* </Scrollbars> */}
         </div>
       )}
       {MDData && !isVisible && (
         <>
           <div className="sidebar-content-area">
-            <Scrollbars
+            {/* <Scrollbars
               ref={scrollBar}
               style={{ width: "100%", height: "100%" }}
-            >
-              <div ref={mdRef} className="md-data">
-                <ReactMarkdown>{MDData}</ReactMarkdown>
+            > */}
+            <SimpleBar ref={scrollBar} style={{ maxHeight: "100%" }}>
+              <div className="sidebar-content-area listing">
+                <div ref={mdRef} className="md-data">
+                  <ReactMarkdown>{MDData}</ReactMarkdown>
+                </div>
               </div>
-            </Scrollbars>
+            </SimpleBar>
+            {/* </Scrollbars> */}
 
             <div className="sidebar-footer">
               {prevPage && <p>Prev: {prevPage}</p>}

@@ -8,9 +8,10 @@ body {
   flex-wrap: wrap;
   align-items: center;
   height: 100vh;
-  flex-direction: column;
-  
+  flex-direction: column; 
 }
+/* .sidebar-content-area > div {overflow: visible!important; height: auto!important;}
+.sidebar-content-area > div > div:first-child {overflow: hidden!important; margin: 0!important; inset: auto!important;} */
 /* Above Css may not require while merging */
 /* Light Theme */
 .change-theme {
@@ -91,13 +92,30 @@ body {
 .sidebar-content-area .md-data {
   padding: 15px  20px 15px 20px;  
   /* overflow-y: auto; */
-  height:   100%;
+  height:   calc(100% - 30px);
 }
+/* .sidebar-content-area pre code::-webkit-scrollbar {
+  height: 3px;
+  background-color: transparent; 
+}
+.sidebar-content-area .md-data::-webkit-scrollbar {
+  width: 3px;
+  background-color: transparent; 
+}
+
+.sidebar-content-area pre code::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #999999;
+}
+.sidebar-content-area .md-data::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #999999;
+} */
 .sidebar-content-area p {margin: 5px 0 20px;}
 .sidebar-content-area p,
 .sidebar-content-area dl dd {
   font-size: 12px;
-  line-height: 16px;
+  line-height: 17px;
   color: #171723;
 }
 
@@ -112,7 +130,7 @@ body {
 .sidebar-content-area h2 {
   margin: 0;
   color: #999999;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 15px;
   text-transform: uppercase;
   font-weight: 400;
@@ -163,11 +181,11 @@ body {
 .sidebar-content-area pre code {
   font-size: 12px;
   line-height: 15px;
-  margin: 20px 0;
+  margin: 20px 0 30px;
   padding: 8px;
   display: block;
   overflow: auto;
-  border: 1px solid #E4E4E4;
+  border: 1px solid rgba(255,255,255,0.15);
   font-family: 'Roboto', sans-serif;
 }
 .sidebar-content-area h1:empty,
@@ -189,8 +207,13 @@ body {
   right: 0;
   margin: auto;
   background: #FFFFFF;
-  padding: 15px 20px;
+  padding: 20px;
   border-top: 1px solid #E4E4E4;
+  min-height: 75px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
 }
 .sidebar-footer p {
   margin: 0;
@@ -254,7 +277,7 @@ body {
   background-color: #30363D;
   border-color: rgba(255,255,255,0.15);
 }
-.sidebar.dark ul {
+.sidebar.dark .top-header-area  ul {
   border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 .sidebar.dark ul li svg path {
@@ -313,7 +336,11 @@ body {
   border-color: #5A6EFF;
   color:rgba(255, 255, 255, 0.75);
 }
-
+.sidebar.dark .sidebar-content-area ul {color: rgba(255,255,255,0.75);}
+/* .sidebar.dark .sidebar-content-area .md-data::-webkit-scrollbar-thumb,
+.sidebar.dark .sidebar-content-area pre code::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.25);
+} */
 
 #btn1 {
   
