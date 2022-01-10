@@ -7,7 +7,12 @@ const initialPageinationState = {
   prevPage: "",
   prevURL: "",
   nextURL: "",
+  
 };
+
+const initialHomeButtonColor={
+  homeButtonActive:true,
+}
 
 const paginationSlice = createSlice({
   name: "pagination",
@@ -30,12 +35,24 @@ const paginationSlice = createSlice({
     },
     setNextURL(state,action){
          state.nextURL=action.payload
-    }
+    },
+    
   },
 });
 
+const homeButtonSclice = createSlice({
+  name:'homebutton',
+  initialState:initialHomeButtonColor,
+  reducers:{
+    setHomeButtonActive(state,action){
+      state.homeButtonActive= action.payload;
+    }
+  }
+})
+
 const store = configureStore({
-  reducer: { pagination: paginationSlice.reducer },
+  reducer: { pagination: paginationSlice.reducer, homeButton:homeButtonSclice.reducer }
 });
 export const paginationActions = paginationSlice.actions;
+export const homeButtonActions = homeButtonSclice.actions;
 export default store;
