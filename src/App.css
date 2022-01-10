@@ -334,3 +334,53 @@ body {
   transform: rotate(1turn);
   transition-duration: .5s;
  }
+
+ .fillColor{
+   fill: rgb(29, 28, 28)
+ }
+
+ .fillColorActive{
+   fill:#5A6EFF
+ }
+
+ .home .tooltiptext{
+  visibility: hidden;
+  background-color: grey;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 2px 0;
+  font-size: 10px;
+   /* Position the tooltip */
+
+  z-index: 1;
+  
+ }
+
+
+.home:hover .tooltiptext {
+  visibility: visible;
+}
+
+#btn1 .tooltiptext {
+  visibility: hidden;
+  background-color: grey;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 2px 0;
+  font-size: 10px;
+   /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top:15px;
+  right:8px;
+}
+
+#btn1:hover .tooltiptext {
+  visibility: visible;
+}
+
+#btn1:active .tooltiptext{
+  visibility: hidden;
+}
