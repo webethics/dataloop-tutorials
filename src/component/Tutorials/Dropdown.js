@@ -5,11 +5,11 @@ import onClickOutside from "react-onclickoutside";
 
 function Dropdown(props) {
   const [isOpen, setIsOpen] = useState(false);
-  
+
 
   Dropdown.handleClickOutside = () => {
     setIsOpen(false);
-    
+
   };
   return (
     <span className={isOpen ? "Dropdown active" : "Dropdown"}>
@@ -29,4 +29,4 @@ function Dropdown(props) {
 const clickOutsideConfig = {
   handleClickOutside: () => Dropdown.handleClickOutside,
 };
-export default onClickOutside(Dropdown,clickOutsideConfig) ; 
+export default onClickOutside(Dropdown, clickOutsideConfig); 

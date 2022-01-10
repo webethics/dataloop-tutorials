@@ -7,11 +7,11 @@ import {
 } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { paginationActions, homeButtonActions } from "../../../store";
-
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import SimpleBar from "simplebar-react";
 import "simplebar/dist/simplebar.min.css";
+ 
 
 const DUMMY_DATA = {
   content: [
@@ -106,6 +106,9 @@ const PageDescription = forwardRef((props, ref) => {
       refChild &&
         refChild.innerHTML &&
         refChild.parentNode.insertBefore(button, refChild.nextSibling);
+        
+      
+
     }
   }, [MDData, isVisible]);
 
@@ -182,6 +185,10 @@ const PageDescription = forwardRef((props, ref) => {
   const prevButtonHandler = (urlForPrev) => {
     scrollBar.current.scrollIntoView({ behavior: "smooth" });
     getDetails(DUMMY_DATA.content[curPage - 2].location);
+
+    // getDetails(
+    //   "https://raw.githubusercontent.com/dataloop-ai/dtlpy-documentation/sdk-tutorials/tutorials/data_management/cloud_storage_integrations/chapter.md"
+    // );
     if (parseInt(curPage) <= 2) {
       dispatch(paginationActions.setprevPage(null));
     }
@@ -249,7 +256,7 @@ const PageDescription = forwardRef((props, ref) => {
           style={{ padding: "0", margin: 0 }}
           className="sidebar-content-area listing"
         >
-          <SimpleBar style={{ height: "100%" }}>
+          <SimpleBar style={{ height: "100%" }} autoHide={false}>
             <div className="md-data">
               <h1>{data.name}</h1>
               <p>{data.description}</p>
@@ -261,7 +268,7 @@ const PageDescription = forwardRef((props, ref) => {
       {MDData && !isVisible && (
         <>
           <div className="sidebar-content-area">
-            <SimpleBar style={{ height: "100%" }}>
+            <SimpleBar style={{ height: "100%" }}  autoHide={false}>
               <div ref={scrollBar} className="sidebar-content-area listing">
                 <div ref={mdRef} className="md-data">
                   <ReactMarkdown>{MDData}</ReactMarkdown>
@@ -273,7 +280,7 @@ const PageDescription = forwardRef((props, ref) => {
               {prevPage && <p>Prev: {prevPage}</p>}
               {nextPage && <p>Next: {nextPage}</p>}
               <div className="footer-buttons-wrap">
-                <div class="btn-placeholder">
+                <div className="btn-placeholder">
                   {curPage > 1 && (
                     <button
                       className="prev"
@@ -289,7 +296,7 @@ const PageDescription = forwardRef((props, ref) => {
                 <p>
                   {curPage} of {totPage} chapters
                 </p>
-                <div class="btn-placeholder">
+                <div className="btn-placeholder">
                   {curPage < totPage && (
                     <button
                       className="next"
