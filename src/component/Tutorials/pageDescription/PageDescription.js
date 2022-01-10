@@ -113,8 +113,9 @@ const PageDescription = forwardRef((props, ref) => {
   ));
 
   const prevButtonHandler = (urlForPrev) => {
-    scrollBar.current.scrollX(0, 0);
+    // scrollBar.current.scrollX(0, 0);
     // scrollBar.current.scrollToTop();
+    scrollBar.current.scrollToTop();
     getDetails(
       "https://raw.githubusercontent.com/dataloop-ai/dtlpy-documentation/sdk-tutorials/tutorials/data_management/cloud_storage_integrations/chapter.md"
     );
@@ -142,7 +143,7 @@ const PageDescription = forwardRef((props, ref) => {
 
   const nextButtonHandler = (urlForNext) => {
     // scrollBar.current.scrollToTop();
-    window.scrollTo(0, 0)
+   
     // window.scroll({
     //   top: 0,
     //   behavior: 'smooth',
@@ -180,13 +181,13 @@ const PageDescription = forwardRef((props, ref) => {
       {isVisible && (
         <div className="sidebar-content-area listing">
           {/* <Scrollbars style={{ width: "100%" }}> */}
-
-          <div className="md-data">
-            <h1>{data.name}</h1>
-            <p>{data.description}</p>
-            {list}
-          </div>
-
+          <SimpleBar style={{ maxHeight: "100%" }}>
+            <div className="md-data">
+              <h1>{data.name}</h1>
+              <p>{data.description}</p>
+              {list}
+            </div>
+          </SimpleBar>
           {/* </Scrollbars> */}
         </div>
       )}
