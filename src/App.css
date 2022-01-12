@@ -33,10 +33,34 @@ body {
   display: flex;
   align-items: center;
 }
+
 .sidebar .top-header-area ul {
   padding: 5px 10px;
   border-bottom: 1px solid #e4e4e4;
 }
+.sidebar .top-header-area ul li {position: relative;}
+.sidebar .top-header-area ul li .fillColorActive {
+  fill:#3452ff;
+}
+.sidebar pre code ~ button .tooltiptext,
+.sidebar .top-header-area ul li .tooltiptext {
+  position: absolute;
+  top: 100%;
+  opacity: 0;
+  visibility: hidden;
+  font-size: 10px;
+  line-height: 12px;
+  color: #767676;
+  text-transform: capitalize;
+  padding: 2px 5px;
+  background: #ffffff;
+  box-shadow: 0px 3px 6px rgba(16, 30, 115, 0.15);
+  border-radius:5px;
+  left: -10px;  
+  transition: visibility 0.4s linear, opacity 0.4s linear;
+}
+.sidebar pre code ~ button:hover .tooltiptext,
+.sidebar .top-header-area ul li:hover .tooltiptext {opacity: 1; visibility: visible;}
 .sidebar .top-header-area ul li:not(:last-child):not(:first-child) {margin-left: 10px;}
 .sidebar ul li:last-child {margin-left: auto;}
 .sidebar ul li svg {
@@ -88,13 +112,8 @@ body {
   padding-bottom: 100px;
   height: calc(100% - 130px);
 }
-
-.sidebar-content-area .md-data {
-  padding: 15px  20px 15px 20px;  
-  /* overflow-y: auto; */
-  height:   calc(100% - 30px);
-}
-/* .sidebar-content-area pre code::-webkit-scrollbar {
+/****************/
+.sidebar-content-area pre code::-webkit-scrollbar {
   height: 3px;
   background-color: transparent; 
 }
@@ -110,7 +129,22 @@ body {
 .sidebar-content-area .md-data::-webkit-scrollbar-thumb {
   border-radius: 5px;
   background: #999999;
-} */
+}
+
+/* For Mozilla */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #999999;
+}
+
+.sidebar-content-area .md-data {
+  padding: 15px 16px; 
+   
+  height:   calc(100% - 30px);
+}
+.simplebar-track.simplebar-vertical {width: 7px!important;}
+.simplebar-scrollbar.simplebar-visible:before {background:#999999!important; opacity: 1!important;}
+
 .sidebar-content-area p {margin: 5px 0 20px;}
 .sidebar-content-area p,
 .sidebar-content-area dl dd {
@@ -129,7 +163,7 @@ body {
 
 .sidebar-content-area h2 {
   margin: 0;
-  color: #999999;
+  color: #767676;
   font-size: 12px;
   line-height: 15px;
   text-transform: uppercase;
@@ -138,7 +172,7 @@ body {
 .sidebar-content-area h3 {
   margin: 5px 0 0;
   font-weight: 400;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 15px;
   color: #999999;
   text-transform: uppercase;
@@ -185,7 +219,7 @@ body {
   padding: 8px;
   display: block;
   overflow: auto;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid #e4e4e4;
   font-family: 'Roboto', sans-serif;
 }
 .sidebar-content-area h1:empty,
@@ -209,7 +243,9 @@ body {
   background: #FFFFFF;
   padding: 20px;
   border-top: 1px solid #E4E4E4;
-  min-height: 75px;
+  min-height: 116px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -220,16 +256,17 @@ body {
 }
 .sidebar-footer > p {
   color: #999999;
+  line-height: 16px;
 }
-.sidebar-footer p:first-child {margin-bottom: 5px;}
+/* .sidebar-footer p:first-child {margin-bottom: 5px;} */
 .sidebar-footer button {
   border: 1px solid #3452FF;
   border-radius: 2px;
   font-size: 14px;
-  line-height: 16px;
+  line-height: 14px;
   text-transform: uppercase;
   font-family: 'Roboto', sans-serif;
-  padding: 6px 15px 4px;
+  padding: 6px 16px;
   cursor: pointer;
 }
 .sidebar-footer button.next {
@@ -307,12 +344,15 @@ body {
 .sidebar.dark .sidebar-content-area p,
 .sidebar.dark .sidebar-content-area h1 {color: rgba(255,255,255,0.75);}
 .sidebar.dark .sidebar-footer > p,
-.sidebar.dark .sidebar-content-area h3,
-.sidebar.dark .sidebar-content-area h2 {color: rgba(255,255,255,0.25);}
+.sidebar.dark .sidebar-content-area h3 {color: rgba(255,255,255,0.50);}   
+.sidebar.dark .sidebar-content-area h2 {color: rgba(255,255,255,0.50);}
 .sidebar.dark .sidebar-content-area dl dt {color: #7B8CFF;}
 .sidebar.dark .sidebar-content-area pre button svg path {fill:rgba(255,255,255,0.75);}
 .sidebar.dark .sidebar-footer button {  
   border-color:  #7B8CFF;
+}
+.sidebar.dark .sidebar-content-area pre code {
+  border: 1px solid rgba(255,255,255,0.15);
 }
 .sidebar.dark .sidebar-footer button.next {
   background-color:#7B8CFF;
@@ -337,77 +377,30 @@ body {
   color:rgba(255, 255, 255, 0.75);
 }
 .sidebar.dark .sidebar-content-area ul {color: rgba(255,255,255,0.75);}
-/* .sidebar.dark .sidebar-content-area .md-data::-webkit-scrollbar-thumb,
+.sidebar.dark .top-header-area ul li .fillColorActive {
+  fill:#7C8CFF;
+}
+.sidebar.dark .simplebar-scrollbar.simplebar-visible:before {background:rgba(255,255,255,0.25)!important;}
+.sidebar.dark  pre code ~ button .tooltiptext,
+.sidebar.dark .top-header-area ul li .tooltiptext {
+  color: rgba(255,255,255,0.25);
+  background: #30363D;
+  box-shadow: 0px 3px 6px rgba(41, 46, 53, 0.75);
+}
+.sidebar.dark .sidebar-content-area .md-data::-webkit-scrollbar-thumb,
 .sidebar.dark .sidebar-content-area pre code::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.25);
-} */
-
+} 
 #btn1 {
-  
-  font-size: 24px;
-  text-align: center;
   cursor: pointer;
   outline: none;
   color: #171723;
-  border: none;
-  border-radius: 15px;
-  
 }
-
-
-
 #btn1:active {
-  transform: translateY(4px);
-  transform: rotate(1turn);
-  transition-duration: .5s;
- }
-
- .fillColor{
-   fill: rgb(29, 28, 28)
- }
-
- .fillColorActive{
-   fill:#5A6EFF
- }
-
- .home .tooltiptext{
-  visibility: hidden;
-  background-color: grey;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 2px 0;
-  font-size: 10px;
-   /* Position the tooltip */
-
-  z-index: 1;
-  
- }
-
-
-.home:hover .tooltiptext {
-  visibility: visible;
+  transform: -webkit-scale(1.1);
+  transform: -moz-scale(1.1);
+  transform: -ms-scale(1.1);
+  transform: -o-scale(1.1);
+  transform: scale(1.1);
 }
-
-#btn1 .tooltiptext {
-  visibility: hidden;
-  background-color: grey;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 2px 0;
-  font-size: 10px;
-   /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-  top:15px;
-  right:8px;
-}
-
-#btn1:hover .tooltiptext {
-  visibility: visible;
-}
-
-#btn1:active .tooltiptext{
-  visibility: hidden;
-}
+#btn1:active svg path {fill: green;}
