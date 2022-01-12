@@ -3,10 +3,13 @@ import { useLayoutEffect, useState } from "react";
 import "./App.css";
 import Tutorials from "./component/Tutorials/Tutorials";
 import config from "./config/config";
+  
 
 function App() {
   const [initialData, setInitialData] = useState(null);
   const [lightTheme, setChangeTheme] = useState("");
+
+
 
   useLayoutEffect(() => {
    

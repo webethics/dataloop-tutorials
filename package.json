@@ -15,6 +15,7 @@
     "react-onclickoutside": "^6.12.1",
     "react-redux": "^7.2.6",
     "react-scripts": "5.0.0",
+    "simple-scrollbar": "^0.4.0",
     "simplebar": "^5.3.6",
     "simplebar-react": "^2.3.6",
     "web-vitals": "^2.1.2"
